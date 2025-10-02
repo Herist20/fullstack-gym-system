@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.base.json",
+  "files": [],
+  "references": [
+    { "path": "./apps/user-landing" },
+    { "path": "./apps/user-webapp" },
+    { "path": "./apps/admin-landing" },
+    { "path": "./apps/admin-dashboard" },
+    { "path": "./packages/ui" },
+    { "path": "./packages/database" },
+    { "path": "./packages/auth" },
+    { "path": "./packages/config" }
+  ]
+}
