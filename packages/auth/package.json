@@ -10,9 +10,13 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.39.3",
-    "@supabase/ssr": "^0.1.0"
+    "@supabase/ssr": "^0.1.0",
+    "@gym/database": "workspace:*",
+    "react": "^18.3.1"
   },
   "devDependencies": {
-    "@types/node": "^20.11.5"
+    "@types/node": "^20.11.5",
+    "@types/react": "^18.3.0",
+    "next": "^14.1.0"
   }
 }
