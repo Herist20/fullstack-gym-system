@@ -1,22 +1,31 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "../styles/globals.css";
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/react'
+import { Navbar } from '@/components/navbar'
+import { Footer } from '@/components/footer'
+import '../styles/globals.css'
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: "Gym Management System - User Portal",
-  description: "Welcome to our gym management system",
-};
+  title: 'GymFit - Transform Your Body & Mind',
+  description: 'Join GymFit for world-class training, expert trainers, and state-of-the-art facilities. Start your fitness journey today.',
+  keywords: 'gym, fitness, training, workout, health, exercise',
+}
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" className="dark">
+      <body className={`${inter.className} bg-black text-white antialiased`}>
+        <Navbar />
+        <main className="min-h-screen pt-16">{children}</main>
+        <Footer />
+        <Analytics />
+      </body>
     </html>
-  );
+  )
 }
