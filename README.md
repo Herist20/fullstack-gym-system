@@ -1,6 +1,37 @@
-# Gym Management System
+# 🏋️‍♂️ Gym Management System
 
 A comprehensive gym management system built with a monorepo architecture using Next.js 14, TypeScript, Tailwind CSS, and Supabase.
+
+## 🎯 NEW? START HERE!
+
+### 👉 [**START_HERE.md**](./START_HERE.md) ← Baca ini dulu!
+
+Atau pilih sesuai kebutuhan:
+
+| Dokumentasi | Untuk Siapa | Waktu |
+|------------|-------------|-------|
+| [🎯 START_HERE.md](./START_HERE.md) | **Semua orang** - Navigation hub | 2 min |
+| [🇮🇩 RUN_PROJECT.md](./RUN_PROJECT.md) | Pemula - Step-by-step lengkap | 15 min |
+| [⚡ QUICKSTART.md](./QUICKSTART.md) | Developer - Setup cepat | 5 min |
+| [📋 SETUP_GUIDE.md](./SETUP_GUIDE.md) | Technical - Detail lengkap | 20 min |
+| [📊 PROJECT_SUMMARY.md](./PROJECT_SUMMARY.md) | Overview - Apa yang sudah dibuat | 10 min |
+| [✅ CHECKLIST.md](./CHECKLIST.md) | Verification - Cek setup Anda | 10 min |
+
+## 🚀 Quick Start (TL;DR)
+
+```bash
+# Windows: Double click setup.bat
+# Mac/Linux: ./setup.sh
+
+# Atau manual:
+pnpm install
+cp .env.example .env.local  # Edit dengan Supabase credentials
+supabase link --project-ref <your-ref>
+pnpm db:push
+pnpm dev
+```
+
+📖 **Detail lengkap:** [RUN_PROJECT.md](./RUN_PROJECT.md)
 
 ## 🏗️ Project Structure
 
@@ -33,16 +64,28 @@ gym-system/
 
 ## 📦 Installation
 
-1. Clone the repository
-2. Install dependencies:
-
 ```bash
+# 1. Install dependencies
 pnpm install
+
+# 2. Setup environment variables
+cp .env.example .env.local
+# Edit .env.local dengan Supabase credentials
+
+# 3. Install Supabase CLI
+npm install -g supabase
+
+# 4. Link to Supabase project
+supabase link --project-ref <your-project-ref>
+
+# 5. Run database migrations
+pnpm db:push
+
+# 6. Start development
+pnpm dev
 ```
 
-3. Set up environment variables:
-   - Copy `.env.example` to `.env.local` in each app directory
-   - Fill in your Supabase credentials
+Lihat [RUN_PROJECT.md](./RUN_PROJECT.md) untuk panduan lengkap!
 
 ## 🎨 Theme Colors
 
@@ -151,12 +194,25 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
 
 ## 📝 Scripts
 
+### Development
 - `pnpm dev` - Start all apps in development mode
 - `pnpm build` - Build all apps for production
 - `pnpm lint` - Lint all packages
 - `pnpm format` - Format code with Prettier
 - `pnpm type-check` - Run TypeScript type checking
 - `pnpm clean` - Clean all build artifacts
+
+### Database
+- `pnpm db:push` - Push migrations to Supabase
+- `pnpm db:reset` - Reset local database
+- `pnpm db:seed` - Seed development data
+- `pnpm types:generate` - Generate TypeScript types from DB
+
+### Supabase
+- `pnpm supabase:start` - Start local Supabase
+- `pnpm supabase:stop` - Stop local Supabase
+- `pnpm supabase:status` - Check Supabase status
+- `pnpm supabase:link` - Link to Supabase project
 
 ## 🛠️ Best Practices
 
@@ -167,6 +223,25 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
 - Dark mode support
 - Mobile-responsive design
 - Type-safe database queries
+
+## 📚 Database Documentation
+
+Database schema lengkap ada di [supabase/README.md](./supabase/README.md)
+
+**Database Features:**
+- ✅ 10 Core Tables (users, memberships, classes, bookings, etc.)
+- ✅ Row Level Security (RLS) policies
+- ✅ 11 Database functions untuk common queries
+- ✅ Auto-generated TypeScript types
+- ✅ Seed data untuk development
+- ✅ Automatic triggers (spots management, expiry, etc.)
+
+## 🗂️ Documentation
+
+- 📖 [RUN_PROJECT.md](./RUN_PROJECT.md) - Panduan setup lengkap (Bahasa Indonesia)
+- 🚀 [QUICKSTART.md](./QUICKSTART.md) - Quick start guide
+- 📋 [SETUP_GUIDE.md](./SETUP_GUIDE.md) - Detailed setup documentation
+- 🗄️ [supabase/README.md](./supabase/README.md) - Database documentation
 
 ## 📄 License
 

@@ -2,11 +2,44 @@
 -- This file contains sample data for testing and development
 
 -- =====================================================
--- SEED USERS (ADMIN, TRAINERS, MEMBERS)
+-- SEED AUTH USERS FIRST (Required by foreign key)
 -- =====================================================
 
--- Note: In production, users are created through Supabase Auth
--- This seed assumes auth.users already has these IDs or you'll create them manually
+-- Insert into auth.users first (Supabase Auth table)
+-- Password for all users: "password123"
+INSERT INTO auth.users (
+  id,
+  instance_id,
+  email,
+  encrypted_password,
+  email_confirmed_at,
+  created_at,
+  updated_at,
+  raw_app_meta_data,
+  raw_user_meta_data,
+  is_super_admin,
+  role,
+  aud,
+  confirmation_token,
+  recovery_token
+) VALUES
+-- Admin
+('00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000000', 'admin@gymfit.com', '$2a$10$rLHKHQVJL5O8bRHqQqWLqe8nXrqVFqGP.1qVQ0qZcgKQRMhqIGrZm', NOW(), NOW(), NOW(), '{"provider":"email","providers":["email"]}', '{"full_name":"Admin User"}', false, 'authenticated', 'authenticated', '', ''),
+-- Trainers
+('00000000-0000-0000-0000-000000000002', '00000000-0000-0000-0000-000000000000', 'john.trainer@gymfit.com', '$2a$10$rLHKHQVJL5O8bRHqQqWLqe8nXrqVFqGP.1qVQ0qZcgKQRMhqIGrZm', NOW(), NOW(), NOW(), '{"provider":"email","providers":["email"]}', '{"full_name":"John Smith"}', false, 'authenticated', 'authenticated', '', ''),
+('00000000-0000-0000-0000-000000000003', '00000000-0000-0000-0000-000000000000', 'sarah.trainer@gymfit.com', '$2a$10$rLHKHQVJL5O8bRHqQqWLqe8nXrqVFqGP.1qVQ0qZcgKQRMhqIGrZm', NOW(), NOW(), NOW(), '{"provider":"email","providers":["email"]}', '{"full_name":"Sarah Johnson"}', false, 'authenticated', 'authenticated', '', ''),
+('00000000-0000-0000-0000-000000000004', '00000000-0000-0000-0000-000000000000', 'mike.trainer@gymfit.com', '$2a$10$rLHKHQVJL5O8bRHqQqWLqe8nXrqVFqGP.1qVQ0qZcgKQRMhqIGrZm', NOW(), NOW(), NOW(), '{"provider":"email","providers":["email"]}', '{"full_name":"Mike Williams"}', false, 'authenticated', 'authenticated', '', ''),
+('00000000-0000-0000-0000-000000000005', '00000000-0000-0000-0000-000000000000', 'emma.trainer@gymfit.com', '$2a$10$rLHKHQVJL5O8bRHqQqWLqe8nXrqVFqGP.1qVQ0qZcgKQRMhqIGrZm', NOW(), NOW(), NOW(), '{"provider":"email","providers":["email"]}', '{"full_name":"Emma Davis"}', false, 'authenticated', 'authenticated', '', ''),
+-- Members
+('00000000-0000-0000-0000-000000000010', '00000000-0000-0000-0000-000000000000', 'alice.brown@gmail.com', '$2a$10$rLHKHQVJL5O8bRHqQqWLqe8nXrqVFqGP.1qVQ0qZcgKQRMhqIGrZm', NOW(), NOW(), NOW(), '{"provider":"email","providers":["email"]}', '{"full_name":"Alice Brown"}', false, 'authenticated', 'authenticated', '', ''),
+('00000000-0000-0000-0000-000000000011', '00000000-0000-0000-0000-000000000000', 'bob.wilson@gmail.com', '$2a$10$rLHKHQVJL5O8bRHqQqWLqe8nXrqVFqGP.1qVQ0qZcgKQRMhqIGrZm', NOW(), NOW(), NOW(), '{"provider":"email","providers":["email"]}', '{"full_name":"Bob Wilson"}', false, 'authenticated', 'authenticated', '', ''),
+('00000000-0000-0000-0000-000000000012', '00000000-0000-0000-0000-000000000000', 'carol.martinez@gmail.com', '$2a$10$rLHKHQVJL5O8bRHqQqWLqe8nXrqVFqGP.1qVQ0qZcgKQRMhqIGrZm', NOW(), NOW(), NOW(), '{"provider":"email","providers":["email"]}', '{"full_name":"Carol Martinez"}', false, 'authenticated', 'authenticated', '', ''),
+('00000000-0000-0000-0000-000000000013', '00000000-0000-0000-0000-000000000000', 'david.lee@gmail.com', '$2a$10$rLHKHQVJL5O8bRHqQqWLqe8nXrqVFqGP.1qVQ0qZcgKQRMhqIGrZm', NOW(), NOW(), NOW(), '{"provider":"email","providers":["email"]}', '{"full_name":"David Lee"}', false, 'authenticated', 'authenticated', '', ''),
+('00000000-0000-0000-0000-000000000014', '00000000-0000-0000-0000-000000000000', 'eva.garcia@gmail.com', '$2a$10$rLHKHQVJL5O8bRHqQqWLqe8nXrqVFqGP.1qVQ0qZcgKQRMhqIGrZm', NOW(), NOW(), NOW(), '{"provider":"email","providers":["email"]}', '{"full_name":"Eva Garcia"}', false, 'authenticated', 'authenticated', '', '');
+
+-- =====================================================
+-- SEED PUBLIC USERS TABLE
+-- =====================================================
 
 -- Admin User
 INSERT INTO public.users (id, email, role, full_name, phone, avatar_url) VALUES
@@ -21,11 +54,11 @@ INSERT INTO public.users (id, email, role, full_name, phone, avatar_url) VALUES
 
 -- Member Users
 INSERT INTO public.users (id, email, role, full_name, phone, avatar_url) VALUES
-('00000000-0000-0000-0000-000000000010', 'member1@gmail.com', 'member', 'Alice Brown', '+6281234567895', 'https://api.dicebear.com/7.x/avataaars/svg?seed=alice'),
-('00000000-0000-0000-0000-000000000011', 'member2@gmail.com', 'member', 'Bob Wilson', '+6281234567896', 'https://api.dicebear.com/7.x/avataaars/svg?seed=bob'),
-('00000000-0000-0000-0000-000000000012', 'member3@gmail.com', 'member', 'Carol Martinez', '+6281234567897', 'https://api.dicebear.com/7.x/avataaars/svg?seed=carol'),
-('00000000-0000-0000-0000-000000000013', 'member4@gmail.com', 'member', 'David Lee', '+6281234567898', 'https://api.dicebear.com/7.x/avataaars/svg?seed=david'),
-('00000000-0000-0000-0000-000000000014', 'member5@gmail.com', 'member', 'Eva Garcia', '+6281234567899', 'https://api.dicebear.com/7.x/avataaars/svg?seed=eva');
+('00000000-0000-0000-0000-000000000010', 'alice.brown@gmail.com', 'member', 'Alice Brown', '+6281234567895', 'https://api.dicebear.com/7.x/avataaars/svg?seed=alice'),
+('00000000-0000-0000-0000-000000000011', 'bob.wilson@gmail.com', 'member', 'Bob Wilson', '+6281234567896', 'https://api.dicebear.com/7.x/avataaars/svg?seed=bob'),
+('00000000-0000-0000-0000-000000000012', 'carol.martinez@gmail.com', 'member', 'Carol Martinez', '+6281234567897', 'https://api.dicebear.com/7.x/avataaars/svg?seed=carol'),
+('00000000-0000-0000-0000-000000000013', 'david.lee@gmail.com', 'member', 'David Lee', '+6281234567898', 'https://api.dicebear.com/7.x/avataaars/svg?seed=david'),
+('00000000-0000-0000-0000-000000000014', 'eva.garcia@gmail.com', 'member', 'Eva Garcia', '+6281234567899', 'https://api.dicebear.com/7.x/avataaars/svg?seed=eva');
 
 -- =====================================================
 -- SEED TRAINERS
