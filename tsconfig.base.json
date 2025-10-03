@@ -17,6 +17,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
+    "baseUrl": ".",
     "paths": {
       "@gym/ui": ["./packages/ui/src"],
       "@gym/database": ["./packages/database/src"],
