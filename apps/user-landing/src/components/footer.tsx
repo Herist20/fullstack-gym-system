@@ -3,8 +3,8 @@ import { Instagram, Facebook, Twitter, Mail, MapPin, Phone } from 'lucide-react'
 
 export function Footer() {
   return (
-    <footer className="border-t border-white/10 bg-black">
-      <div className="container mx-auto px-4 py-12">
+    <footer className="border-t border-white/5 bg-black">
+      <div className="container mx-auto px-4 py-12 md:py-16">
         <div className="grid gap-8 md:grid-cols-4">
           <div>
             <h3 className="mb-4 text-xl font-bold">
@@ -60,7 +60,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 border-t border-white/10 pt-8 text-center text-sm text-gray-400">
+        <div className="mt-10 border-t border-white/5 pt-8 text-center text-sm text-gray-500">
           <p>&copy; 2025 GymFit. All rights reserved.</p>
         </div>
       </div>

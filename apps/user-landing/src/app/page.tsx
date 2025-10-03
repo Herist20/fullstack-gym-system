@@ -8,9 +8,9 @@ export default function HomePage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-black">
         {/* Background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 via-black to-black" />
+        <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 via-black to-black" />
 
         {/* Animated background elements */}
         <div className="absolute inset-0 overflow-hidden">
@@ -40,22 +40,24 @@ export default function HomePage() {
           />
         </div>
 
-        <div className="container relative z-10 mx-auto px-4">
+        <div className="container relative z-10 mx-auto px-4 py-20">
           <div className="flex flex-col items-center text-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <h1 className="mb-6 text-5xl font-bold leading-tight md:text-7xl lg:text-8xl">
+              <h1 className="mb-6 text-4xl font-bold leading-tight md:text-6xl lg:text-7xl">
                 Transform Your
                 <br />
-                <span className="text-green-500">Body & Mind</span>
+                <span className="bg-gradient-to-r from-green-400 to-green-600 bg-clip-text text-transparent">
+                  Body & Mind
+                </span>
               </h1>
             </motion.div>
 
             <motion.p
-              className="mb-8 max-w-2xl text-lg text-gray-400 md:text-xl"
+              className="mb-10 max-w-2xl text-base leading-relaxed text-gray-400 md:text-lg"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
@@ -81,38 +83,38 @@ export default function HomePage() {
 
             {/* Stats */}
             <motion.div
-              className="mt-16 grid grid-cols-2 gap-8 md:grid-cols-4 md:gap-12"
+              className="mt-20 grid w-full max-w-5xl grid-cols-2 gap-6 md:grid-cols-4 md:gap-8"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
             >
-              <div>
-                <div className="mb-2 flex justify-center">
+              <div className="rounded-2xl border border-white/5 bg-white/5 p-6 backdrop-blur-sm">
+                <div className="mb-3 flex justify-center">
                   <Users className="h-8 w-8 text-green-500" />
                 </div>
                 <div className="text-3xl font-bold text-white">5000+</div>
-                <div className="text-sm text-gray-400">Active Members</div>
+                <div className="text-xs text-gray-500">Active Members</div>
               </div>
-              <div>
-                <div className="mb-2 flex justify-center">
+              <div className="rounded-2xl border border-white/5 bg-white/5 p-6 backdrop-blur-sm">
+                <div className="mb-3 flex justify-center">
                   <Dumbbell className="h-8 w-8 text-green-500" />
                 </div>
                 <div className="text-3xl font-bold text-white">50+</div>
-                <div className="text-sm text-gray-400">Classes Weekly</div>
+                <div className="text-xs text-gray-500">Classes Weekly</div>
               </div>
-              <div>
-                <div className="mb-2 flex justify-center">
+              <div className="rounded-2xl border border-white/5 bg-white/5 p-6 backdrop-blur-sm">
+                <div className="mb-3 flex justify-center">
                   <Trophy className="h-8 w-8 text-green-500" />
                 </div>
                 <div className="text-3xl font-bold text-white">20+</div>
-                <div className="text-sm text-gray-400">Expert Trainers</div>
+                <div className="text-xs text-gray-500">Expert Trainers</div>
               </div>
-              <div>
-                <div className="mb-2 flex justify-center">
+              <div className="rounded-2xl border border-white/5 bg-white/5 p-6 backdrop-blur-sm">
+                <div className="mb-3 flex justify-center">
                   <Clock className="h-8 w-8 text-green-500" />
                 </div>
                 <div className="text-3xl font-bold text-white">24/7</div>
-                <div className="text-sm text-gray-400">Open Access</div>
+                <div className="text-xs text-gray-500">Open Access</div>
               </div>
             </motion.div>
           </div>
@@ -120,16 +122,16 @@ export default function HomePage() {
 
         {/* Scroll indicator */}
         <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+          className="absolute bottom-10 left-1/2 z-20 -translate-x-1/2"
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
-          <div className="flex flex-col items-center gap-2 text-gray-400">
-            <span className="text-sm">Scroll to explore</span>
-            <div className="h-8 w-5 rounded-full border-2 border-gray-400">
+          <div className="flex flex-col items-center gap-2">
+            <span className="text-xs text-gray-500">Scroll to explore</span>
+            <div className="flex h-8 w-5 items-center justify-center rounded-full border-2 border-gray-600">
               <motion.div
-                className="mx-auto mt-1 h-2 w-1 rounded-full bg-gray-400"
-                animate={{ y: [0, 12, 0] }}
+                className="h-2 w-1 rounded-full bg-gray-600"
+                animate={{ y: [0, 8, 0] }}
                 transition={{ duration: 2, repeat: Infinity }}
               />
             </div>
@@ -138,7 +140,7 @@ export default function HomePage() {
       </section>
 
       {/* Features Section */}
-      <section className="py-24 bg-black">
+      <section className="bg-black py-20 md:py-32">
         <div className="container mx-auto px-4">
           <motion.div
             className="mb-16 text-center"
@@ -147,15 +149,15 @@ export default function HomePage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="mb-4 text-4xl font-bold md:text-5xl">
+            <h2 className="mb-4 text-3xl font-bold md:text-4xl lg:text-5xl">
               Why Choose <span className="text-green-500">GymFit</span>
             </h2>
-            <p className="mx-auto max-w-2xl text-gray-400">
+            <p className="mx-auto max-w-2xl text-sm text-gray-400 md:text-base">
               Everything you need to achieve your fitness goals in one place
             </p>
           </motion.div>
 
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {[
               {
                 icon: Dumbbell,
@@ -190,20 +192,20 @@ export default function HomePage() {
             ].map((feature, index) => (
               <motion.div
                 key={index}
-                className="group rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm transition-all hover:border-green-500/50 hover:bg-white/10"
+                className="group rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all hover:border-green-500/50 hover:bg-white/10"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 whileHover={{ y: -5 }}
               >
-                <div className="mb-4 inline-flex rounded-xl bg-green-500/10 p-3">
+                <div className="mb-4 inline-flex rounded-lg bg-green-500/10 p-3">
                   <feature.icon className="h-6 w-6 text-green-500" />
                 </div>
-                <h3 className="mb-2 text-xl font-semibold text-white">
+                <h3 className="mb-2 text-lg font-semibold text-white">
                   {feature.title}
                 </h3>
-                <p className="text-gray-400">{feature.description}</p>
+                <p className="text-sm text-gray-400">{feature.description}</p>
               </motion.div>
             ))}
           </div>
@@ -211,24 +213,24 @@ export default function HomePage() {
       </section>
 
       {/* Popular Classes Section */}
-      <section className="py-24 bg-gradient-to-b from-black to-gray-900">
+      <section className="bg-gradient-to-b from-black to-gray-900/50 py-20 md:py-32">
         <div className="container mx-auto px-4">
           <motion.div
-            className="mb-16 text-center"
+            className="mb-12 text-center"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="mb-4 text-4xl font-bold md:text-5xl">
+            <h2 className="mb-4 text-3xl font-bold md:text-4xl lg:text-5xl">
               Popular <span className="text-green-500">Classes</span>
             </h2>
-            <p className="mx-auto max-w-2xl text-gray-400">
+            <p className="mx-auto max-w-2xl text-sm text-gray-400 md:text-base">
               Find the perfect class that matches your fitness goals
             </p>
           </motion.div>
 
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {[
               {
                 name: 'HIIT Training',
@@ -254,19 +256,19 @@ export default function HomePage() {
             ].map((classItem, index) => (
               <motion.div
                 key={index}
-                className="group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-white/0 backdrop-blur-sm"
+                className="group relative overflow-hidden rounded-xl border border-white/10 bg-gradient-to-br from-white/5 to-white/0 backdrop-blur-sm transition-all hover:border-green-500/50"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                whileHover={{ scale: 1.02 }}
+                whileHover={{ y: -5 }}
               >
-                <div className="p-8">
-                  <div className="mb-4 text-6xl">{classItem.image}</div>
-                  <div className="mb-2 inline-block rounded-full bg-green-500/10 px-3 py-1 text-xs text-green-500">
+                <div className="p-6">
+                  <div className="mb-4 text-5xl">{classItem.image}</div>
+                  <div className="mb-3 inline-block rounded-full bg-green-500/10 px-3 py-1 text-xs font-medium text-green-500">
                     {classItem.category}
                   </div>
-                  <h3 className="mb-2 text-2xl font-bold text-white">
+                  <h3 className="mb-3 text-xl font-bold text-white">
                     {classItem.name}
                   </h3>
                   <div className="mb-4 flex items-center gap-4 text-sm text-gray-400">
@@ -276,10 +278,10 @@ export default function HomePage() {
                     </span>
                     <span className="flex items-center gap-1">
                       <Users className="h-4 w-4" />
-                      {classItem.spots} spots left
+                      {classItem.spots} spots
                     </span>
                   </div>
-                  <Button className="w-full" variant="outline">
+                  <Button className="w-full" variant="outline" size="sm">
                     Book Now
                   </Button>
                 </div>
@@ -303,24 +305,24 @@ export default function HomePage() {
       </section>
 
       {/* Pricing Section */}
-      <section className="py-24 bg-black">
+      <section className="bg-gradient-to-b from-gray-900/50 to-black py-20 md:py-32">
         <div className="container mx-auto px-4">
           <motion.div
-            className="mb-16 text-center"
+            className="mb-12 text-center"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="mb-4 text-4xl font-bold md:text-5xl">
+            <h2 className="mb-4 text-3xl font-bold md:text-4xl lg:text-5xl">
               Flexible <span className="text-green-500">Membership</span>
             </h2>
-            <p className="mx-auto max-w-2xl text-gray-400">
+            <p className="mx-auto max-w-2xl text-sm text-gray-400 md:text-base">
               Choose the plan that works best for your lifestyle
             </p>
           </motion.div>
 
-          <div className="grid gap-8 md:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-3">
             {[
               {
                 name: 'Basic',
@@ -364,9 +366,9 @@ export default function HomePage() {
             ].map((plan, index) => (
               <motion.div
                 key={index}
-                className={`relative overflow-hidden rounded-2xl border p-8 ${
+                className={`relative flex flex-col overflow-hidden rounded-xl border p-6 ${
                   plan.popular
-                    ? 'border-green-500 bg-gradient-to-br from-green-500/10 to-black'
+                    ? 'border-green-500 bg-gradient-to-br from-green-500/10 to-black shadow-lg shadow-green-500/10'
                     : 'border-white/10 bg-white/5'
                 }`}
                 initial={{ opacity: 0, y: 30 }}
@@ -381,18 +383,18 @@ export default function HomePage() {
                   </div>
                 )}
 
-                <h3 className="mb-2 text-2xl font-bold text-white">{plan.name}</h3>
+                <h3 className="mb-2 text-xl font-bold text-white">{plan.name}</h3>
                 <div className="mb-6">
-                  <span className="text-4xl font-bold text-white">
+                  <span className="text-3xl font-bold text-white">
                     Rp {(plan.price / 1000).toFixed(0)}K
                   </span>
-                  <span className="text-gray-400">/{plan.period}</span>
+                  <span className="text-sm text-gray-400">/{plan.period}</span>
                 </div>
 
-                <ul className="mb-8 space-y-3">
+                <ul className="mb-6 flex-1 space-y-2">
                   {plan.features.map((feature, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm text-gray-300">
-                      <div className="mt-0.5 h-4 w-4 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0">
+                    <li key={i} className="flex items-start gap-2 text-xs text-gray-300">
+                      <div className="mt-0.5 flex h-4 w-4 flex-shrink-0 items-center justify-center rounded-full bg-green-500/20">
                         <div className="h-2 w-2 rounded-full bg-green-500" />
                       </div>
                       {feature}
@@ -403,6 +405,7 @@ export default function HomePage() {
                 <Button
                   className="w-full"
                   variant={plan.popular ? 'default' : 'outline'}
+                  size="sm"
                 >
                   Get Started
                 </Button>
@@ -413,24 +416,24 @@ export default function HomePage() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-24 bg-gradient-to-b from-gray-900 to-black">
+      <section className="bg-black py-20 md:py-32">
         <div className="container mx-auto px-4">
           <motion.div
-            className="mb-16 text-center"
+            className="mb-12 text-center"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="mb-4 text-4xl font-bold md:text-5xl">
+            <h2 className="mb-4 text-3xl font-bold md:text-4xl lg:text-5xl">
               Member <span className="text-green-500">Success Stories</span>
             </h2>
-            <p className="mx-auto max-w-2xl text-gray-400">
+            <p className="mx-auto max-w-2xl text-sm text-gray-400 md:text-base">
               Real results from real people
             </p>
           </motion.div>
 
-          <div className="grid gap-8 md:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-3">
             {[
               {
                 name: 'Sarah Johnson',
@@ -453,20 +456,21 @@ export default function HomePage() {
             ].map((testimonial, index) => (
               <motion.div
                 key={index}
-                className="rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm"
+                className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
+                whileHover={{ y: -5 }}
               >
-                <div className="mb-4 flex items-center gap-4">
-                  <div className="text-4xl">{testimonial.avatar}</div>
+                <div className="mb-4 flex items-center gap-3">
+                  <div className="text-3xl">{testimonial.avatar}</div>
                   <div>
                     <div className="font-semibold text-white">{testimonial.name}</div>
-                    <div className="text-sm text-green-500">{testimonial.result}</div>
+                    <div className="text-xs text-green-500">{testimonial.result}</div>
                   </div>
                 </div>
-                <p className="text-gray-400">&ldquo;{testimonial.quote}&rdquo;</p>
+                <p className="text-sm leading-relaxed text-gray-400">&ldquo;{testimonial.quote}&rdquo;</p>
               </motion.div>
             ))}
           </div>
@@ -474,20 +478,20 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-black">
+      <section className="bg-gradient-to-b from-black to-gray-900 py-20 md:py-32">
         <div className="container mx-auto px-4">
           <motion.div
-            className="relative overflow-hidden rounded-3xl border border-green-500/20 bg-gradient-to-br from-green-500/10 to-black p-12 text-center md:p-16"
+            className="relative overflow-hidden rounded-2xl border border-green-500/20 bg-gradient-to-br from-green-500/10 to-black p-10 text-center md:p-16"
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
             <div className="relative z-10">
-              <h2 className="mb-4 text-4xl font-bold md:text-5xl">
+              <h2 className="mb-4 text-3xl font-bold md:text-4xl lg:text-5xl">
                 Ready to Transform Your Life?
               </h2>
-              <p className="mx-auto mb-8 max-w-2xl text-lg text-gray-400">
+              <p className="mx-auto mb-8 max-w-2xl text-sm leading-relaxed text-gray-400 md:text-base">
                 Join thousands of members who have already started their fitness journey with GymFit
               </p>
               <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
@@ -502,8 +506,8 @@ export default function HomePage() {
             </div>
 
             {/* Decorative elements */}
-            <div className="absolute right-0 top-0 h-64 w-64 bg-green-500/10 rounded-full blur-3xl" />
-            <div className="absolute left-0 bottom-0 h-64 w-64 bg-green-400/10 rounded-full blur-3xl" />
+            <div className="absolute right-0 top-0 h-64 w-64 rounded-full bg-green-500/10 blur-3xl" />
+            <div className="absolute bottom-0 left-0 h-64 w-64 rounded-full bg-green-400/10 blur-3xl" />
           </motion.div>
         </div>
       </section>
