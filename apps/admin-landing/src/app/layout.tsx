@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Toaster } from "sonner";
 import "../styles/globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Gym Management System - Admin Portal",
-  description: "Admin portal for gym management",
+  title: "Gym Staff Portal - Join Our Team",
+  description: "Join our professional gym team. Explore career opportunities for trainers, receptionists, and management positions.",
 };
 
 export default function RootLayout({
@@ -16,7 +17,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        {children}
+        <Toaster position="top-right" richColors />
+      </body>
     </html>
   );
 }
