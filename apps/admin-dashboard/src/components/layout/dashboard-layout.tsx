@@ -10,7 +10,11 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
   const { isAdmin, loading } = useAuth();
   const pathname = usePathname();
 
-  if (loading) {
+  // Development mode: Show admin menu by default when no user is logged in
+  const isDevelopment = process.env.NODE_ENV === 'development';
+  const showAsAdmin = isDevelopment ? true : isAdmin;
+
+  if (loading && !isDevelopment) {
     return (
       <div className="flex h-screen items-center justify-center">
         <div className="text-center">
@@ -23,7 +27,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Sidebar isAdmin={isAdmin} />
+      <Sidebar isAdmin={showAsAdmin} />
 
       <div className="lg:pl-64">
         <Topbar />

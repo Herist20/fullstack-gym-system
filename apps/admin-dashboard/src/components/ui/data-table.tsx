@@ -11,32 +11,58 @@ import {
   ColumnFiltersState,
   getFilteredRowModel,
 } from '@tanstack/react-table';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 
-interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[];
-  data: TData[];
-  searchKey?: string;
-  searchPlaceholder?: string;
+interface CustomColumn<TData> {
+  key: string;
+  label: string;
+  render?: (row: TData) => React.ReactNode;
 }
 
-export function DataTable<TData, TValue>({
+interface DataTableProps<TData> {
+  columns: CustomColumn<TData>[];
+  data: TData[];
+  searchable?: boolean;
+  searchPlaceholder?: string;
+  isLoading?: boolean;
+}
+
+export function DataTable<TData>({
   columns,
   data,
-  searchKey,
+  searchable = false,
   searchPlaceholder = 'Search...',
-}: DataTableProps<TData, TValue>) {
+  isLoading = false,
+}: DataTableProps<TData>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [globalFilter, setGlobalFilter] = useState('');
   const [pagination, setPagination] = useState({
     pageIndex: 0,
     pageSize: 10,
   });
 
+  // Convert custom columns to TanStack Table format
+  const tableColumns = useMemo<ColumnDef<TData>[]>(
+    () =>
+      columns.map((col) => ({
+        id: col.key,
+        accessorKey: col.key,
+        header: col.label,
+        cell: ({ row }) => {
+          if (col.render) {
+            return col.render(row.original);
+          }
+          return (row.original as any)[col.key];
+        },
+      })),
+    [columns]
+  );
+
   const table = useReactTable({
     data,
-    columns,
+    columns: tableColumns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     onSortingChange: setSorting,
@@ -44,23 +70,23 @@ export function DataTable<TData, TValue>({
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
     onPaginationChange: setPagination,
+    onGlobalFilterChange: setGlobalFilter,
     state: {
       sorting,
       columnFilters,
       pagination,
+      globalFilter,
     },
   });
 
   return (
     <div className="space-y-4">
-      {searchKey && (
+      {searchable && (
         <div className="flex items-center">
           <input
             placeholder={searchPlaceholder}
-            value={(table.getColumn(searchKey)?.getFilterValue() as string) ?? ''}
-            onChange={(event) =>
-              table.getColumn(searchKey)?.setFilterValue(event.target.value)
-            }
+            value={globalFilter ?? ''}
+            onChange={(event) => setGlobalFilter(event.target.value)}
             className="max-w-sm px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
           />
         </div>
@@ -101,7 +127,16 @@ export function DataTable<TData, TValue>({
             ))}
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {table.getRowModel().rows?.length ? (
+            {isLoading ? (
+              <tr>
+                <td
+                  colSpan={columns.length}
+                  className="px-6 py-8 text-center text-sm text-gray-500"
+                >
+                  Loading...
+                </td>
+              </tr>
+            ) : table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <tr key={row.id} className="hover:bg-gray-50">
                   {row.getVisibleCells().map((cell) => (
@@ -118,7 +153,7 @@ export function DataTable<TData, TValue>({
               <tr>
                 <td
                   colSpan={columns.length}
-                  className="px-6 py-4 text-center text-sm text-gray-500"
+                  className="px-6 py-8 text-center text-sm text-gray-500"
                 >
                   No results.
                 </td>

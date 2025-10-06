@@ -9,7 +9,6 @@ import { Button } from '@/components/ui/button';
 import { Modal } from '@/components/ui/modal';
 import { Badge } from '@/components/ui/badge';
 import { Plus, MoreVertical, Edit, Trash2, Ban, CheckCircle } from 'lucide-react';
-import { ColumnDef } from '@tanstack/react-table';
 import { Member } from '@/lib/types';
 import { toast } from 'sonner';
 import { formatDate, getInitials } from '@/lib/utils';
@@ -78,12 +77,11 @@ export default function MembersPage() {
     },
   });
 
-  const columns: ColumnDef<Member>[] = [
+  const columns = [
     {
-      accessorKey: 'full_name',
-      header: 'Member',
-      cell: ({ row }) => {
-        const member = row.original;
+      key: 'full_name',
+      label: 'Member',
+      render: (member: Member) => {
         return (
           <div className="flex items-center">
             <div className="h-10 w-10 rounded-full bg-orange-600 flex items-center justify-center text-white font-medium mr-3">
@@ -98,15 +96,15 @@ export default function MembersPage() {
       },
     },
     {
-      accessorKey: 'phone',
-      header: 'Phone',
-      cell: ({ row }) => row.original.phone || '-',
+      key: 'phone',
+      label: 'Phone',
+      render: (member: Member) => member.phone || '-',
     },
     {
-      accessorKey: 'membership',
-      header: 'Membership',
-      cell: ({ row }) => {
-        const membership = row.original.membership;
+      key: 'membership',
+      label: 'Membership',
+      render: (member: Member) => {
+        const membership = member.membership;
         if (!membership || !Array.isArray(membership)) return '-';
         const activeMembership = membership.find((m: any) => m.status === 'active');
         return activeMembership ? (
@@ -115,10 +113,10 @@ export default function MembersPage() {
       },
     },
     {
-      accessorKey: 'status',
-      header: 'Status',
-      cell: ({ row }) => {
-        const membership = row.original.membership;
+      key: 'status',
+      label: 'Status',
+      render: (member: Member) => {
+        const membership = member.membership;
         const status = Array.isArray(membership) && membership.find((m: any) => m.status === 'active')
           ? 'active'
           : 'inactive';
@@ -130,14 +128,14 @@ export default function MembersPage() {
       },
     },
     {
-      accessorKey: 'created_at',
-      header: 'Join Date',
-      cell: ({ row }) => formatDate(row.original.created_at),
+      key: 'created_at',
+      label: 'Join Date',
+      render: (member: Member) => formatDate(member.created_at),
     },
     {
-      id: 'actions',
-      cell: ({ row }) => {
-        const member = row.original;
+      key: 'actions',
+      label: 'Actions',
+      render: (member: Member) => {
         const isActive = Array.isArray(member.membership) && member.membership.some((m: any) => m.status === 'active');
 
         return (
@@ -231,7 +229,7 @@ export default function MembersPage() {
           <DataTable
             columns={columns}
             data={members || []}
-            searchKey="full_name"
+            searchable
             searchPlaceholder="Search members..."
           />
         )}
@@ -241,7 +239,7 @@ export default function MembersPage() {
       <AddMemberModal
         isOpen={showAddModal}
         onClose={() => setShowAddModal(false)}
-        onSubmit={(data) => createMutation.mutate(data)}
+        onSubmit={(data: any) => createMutation.mutate(data)}
         isLoading={createMutation.isPending}
       />
 
@@ -251,7 +249,7 @@ export default function MembersPage() {
           isOpen={!!selectedMember}
           member={selectedMember}
           onClose={() => setSelectedMember(null)}
-          onSubmit={(updates) => updateMutation.mutate({ id: selectedMember.id, updates })}
+          onSubmit={(updates: any) => updateMutation.mutate({ id: selectedMember.id, updates })}
           isLoading={updateMutation.isPending}
         />
       )}

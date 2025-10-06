@@ -70,15 +70,41 @@ export interface Class {
   instructor?: Trainer;
 }
 
+export interface GymClass {
+  id: string;
+  name: string;
+  description?: string;
+  trainer_id?: string;
+  capacity: number;
+  duration_minutes: number;
+  difficulty_level?: string;
+  price?: number;
+  image_url?: string;
+  is_active?: boolean;
+  created_at?: string;
+  updated_at?: string;
+  trainer?: {
+    id: string;
+    full_name: string;
+  };
+}
+
 export interface Schedule {
   id: string;
   class_id: string;
-  date: string;
+  trainer_id?: string;
+  date?: string;
   start_time: string;
   end_time: string;
-  available_spots: number;
+  available_spots?: number;
+  max_capacity?: number;
   status: 'scheduled' | 'ongoing' | 'completed' | 'cancelled';
-  class?: Class;
+  class?: GymClass;
+  trainer?: {
+    id: string;
+    full_name: string;
+  };
+  bookings?: any[];
 }
 
 export interface Booking {
@@ -109,14 +135,18 @@ export interface Payment {
 export interface PaymentTransaction {
   id: string;
   user_id: string;
+  membership_id?: string;
   payment_id?: string;
   amount: number;
-  type: 'membership' | 'class' | 'product' | 'service' | 'refund';
+  payment_method?: string;
+  type?: 'membership' | 'class' | 'product' | 'service' | 'refund';
   status: 'pending' | 'completed' | 'failed' | 'refunded' | 'cancelled';
   invoice_url?: string;
   receipt_url?: string;
   transaction_metadata?: Record<string, any>;
+  metadata?: Record<string, any>;
   user?: User;
+  membership?: any;
   created_at: string;
 }
 

@@ -6,7 +6,6 @@ import { DataTable } from '@/components/ui/data-table';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
-import { ColumnDef } from '@tanstack/react-table';
 import { Equipment } from '@/lib/types';
 import { formatDate } from '@/lib/utils';
 import { createClient } from '@/lib/supabase/client';
@@ -29,23 +28,23 @@ export default function EquipmentPage() {
     queryFn: fetchEquipment,
   });
 
-  const columns: ColumnDef<Equipment>[] = [
+  const columns = [
     {
-      accessorKey: 'name',
-      header: 'Name',
+      key: 'name',
+      label: 'Name',
     },
     {
-      accessorKey: 'category',
-      header: 'Category',
-      cell: ({ row }) => (
-        <span className="capitalize">{row.original.category.replace('_', ' ')}</span>
+      key: 'category',
+      label: 'Category',
+      render: (equipment: Equipment) => (
+        <span className="capitalize">{equipment.category.replace('_', ' ')}</span>
       ),
     },
     {
-      accessorKey: 'status',
-      header: 'Status',
-      cell: ({ row }) => {
-        const status = row.original.status;
+      key: 'status',
+      label: 'Status',
+      render: (equipment: Equipment) => {
+        const status = equipment.status;
         const variant =
           status === 'available'
             ? 'success'
@@ -58,18 +57,18 @@ export default function EquipmentPage() {
       },
     },
     {
-      accessorKey: 'last_maintenance',
-      header: 'Last Maintenance',
-      cell: ({ row }) => {
-        const date = row.original.last_maintenance;
+      key: 'last_maintenance',
+      label: 'Last Maintenance',
+      render: (equipment: Equipment) => {
+        const date = equipment.last_maintenance;
         return date ? formatDate(date) : '-';
       },
     },
     {
-      accessorKey: 'next_maintenance',
-      header: 'Next Due',
-      cell: ({ row }) => {
-        const date = row.original.next_maintenance;
+      key: 'next_maintenance',
+      label: 'Next Due',
+      render: (equipment: Equipment) => {
+        const date = equipment.next_maintenance;
         return date ? formatDate(date) : '-';
       },
     },
@@ -100,7 +99,7 @@ export default function EquipmentPage() {
           <DataTable
             columns={columns}
             data={equipment || []}
-            searchKey="name"
+            searchable
             searchPlaceholder="Search equipment..."
           />
         )}

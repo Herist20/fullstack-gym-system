@@ -6,7 +6,6 @@ import { DataTable } from '@/components/ui/data-table';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Download } from 'lucide-react';
-import { ColumnDef } from '@tanstack/react-table';
 import { Booking } from '@/lib/types';
 import { formatDate, formatTime } from '@/lib/utils';
 import { createClient } from '@/lib/supabase/client';
@@ -34,53 +33,51 @@ export default function BookingsPage() {
     queryFn: fetchBookings,
   });
 
-  const columns: ColumnDef<Booking>[] = [
+  const columns = [
     {
-      accessorKey: 'user.full_name',
-      header: 'Member',
-      cell: ({ row }) => (row.original as any).user?.full_name || '-',
+      key: 'member',
+      label: 'Member',
+      render: (booking: Booking) => (booking as any).user?.full_name || '-',
     },
     {
-      accessorKey: 'schedule.class.name',
-      header: 'Class',
-      cell: ({ row }) => (row.original as any).schedule?.class?.name || '-',
+      key: 'class',
+      label: 'Class',
+      render: (booking: Booking) => (booking as any).schedule?.class?.name || '-',
     },
     {
-      accessorKey: 'schedule.date',
-      header: 'Date',
-      cell: ({ row }) => {
-        const date = (row.original as any).schedule?.date;
+      key: 'date',
+      label: 'Date',
+      render: (booking: Booking) => {
+        const date = (booking as any).schedule?.date;
         return date ? formatDate(date) : '-';
       },
     },
     {
-      accessorKey: 'schedule.start_time',
-      header: 'Time',
-      cell: ({ row }) => {
-        const time = (row.original as any).schedule?.start_time;
+      key: 'time',
+      label: 'Time',
+      render: (booking: Booking) => {
+        const time = (booking as any).schedule?.start_time;
         return time ? formatTime(time) : '-';
       },
     },
     {
-      accessorKey: 'status',
-      header: 'Status',
-      cell: ({ row }) => {
-        const status = row.original.status;
-        const variant =
-          status === 'confirmed'
-            ? 'success'
-            : status === 'cancelled'
-            ? 'danger'
-            : status === 'completed'
-            ? 'info'
-            : 'warning';
-        return <Badge variant={variant}>{status}</Badge>;
+      key: 'status',
+      label: 'Status',
+      render: (booking: Booking) => {
+        const status = booking.status;
+        const colors: Record<string, string> = {
+          confirmed: 'bg-green-100 text-green-800',
+          cancelled: 'bg-red-100 text-red-800',
+          completed: 'bg-blue-100 text-blue-800',
+          pending: 'bg-yellow-100 text-yellow-800',
+        };
+        return <Badge className={colors[status] || colors.pending}>{status}</Badge>;
       },
     },
     {
-      accessorKey: 'booking_date',
-      header: 'Booked At',
-      cell: ({ row }) => formatDate(row.original.booking_date),
+      key: 'booking_date',
+      label: 'Booked At',
+      render: (booking: Booking) => formatDate(booking.booking_date),
     },
   ];
 
