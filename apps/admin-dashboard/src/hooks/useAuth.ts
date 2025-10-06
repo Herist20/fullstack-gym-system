@@ -47,19 +47,26 @@ export function useAuth() {
         }
 
         // Fetch admin user data if applicable
-        const { data: adminProfile } = await supabase
+        const { data: adminProfile, error: adminError } = await supabase
           .from('admin_users')
-          .select('*, user:users(*)')
+          .select('*')
           .eq('user_id', authUser.id)
           .eq('is_active', true)
           .single();
+
+        if (adminError) {
+          console.error('Error fetching admin profile:', adminError);
+        }
+
+        const isAdminRole = adminProfile?.role === 'admin';
+        const isTrainerRole = adminProfile?.role === 'trainer';
 
         setState({
           user: userProfile,
           adminUser: adminProfile || null,
           loading: false,
-          isAdmin: adminProfile?.role === 'admin',
-          isTrainer: adminProfile?.role === 'trainer',
+          isAdmin: isAdminRole,
+          isTrainer: isTrainerRole,
         });
 
         // Update last login
@@ -89,6 +96,8 @@ export function useAuth() {
   const signOut = async () => {
     await supabase.auth.signOut();
     setState({ user: null, adminUser: null, loading: false, isAdmin: false, isTrainer: false });
+    // Redirect to login page after logout
+    window.location.href = '/login';
   };
 
   return {
