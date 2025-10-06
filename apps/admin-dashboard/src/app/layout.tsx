@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 import "../styles/globals.css";
 import { Toaster } from "sonner";
 import { Providers } from "@/components/providers";
@@ -23,6 +24,7 @@ export default function RootLayout({
           {children}
           <Toaster position="top-right" richColors />
         </Providers>
+        <Analytics />
       </body>
     </html>
   );

@@ -16,6 +16,8 @@ import {
   Settings,
   ChevronLeft,
   ChevronRight,
+  QrCode,
+  Banknote,
 } from 'lucide-react';
 import { useState } from 'react';
 
@@ -34,6 +36,8 @@ const adminNavItems: NavItem[] = [
   { name: 'Bookings', href: '/bookings', icon: CalendarCheck },
   { name: 'Trainers', href: '/trainers', icon: UserCog },
   { name: 'Payments', href: '/payments', icon: CreditCard },
+  { name: 'Manual Payments', href: '/payments/manual', icon: Banknote },
+  { name: 'QR Check-in', href: '/checkin', icon: QrCode },
   { name: 'Reports', href: '/reports', icon: BarChart3 },
   { name: 'Equipment', href: '/equipment', icon: Package },
   { name: 'Settings', href: '/settings', icon: Settings },
